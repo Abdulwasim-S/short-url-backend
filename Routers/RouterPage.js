@@ -47,7 +47,7 @@ router.post('/signup',async(req,res)=>{
         let sendMail = await transporter.sendMail(message);
         res.status(200).json({message:"Check your mail for activation link",newUser});
     } catch (error) {
-        res.status(500).json({message:"Unable to signup"})
+        res.status(500).json({message:"Unable to signup",error})
     }
 });
 
@@ -61,7 +61,7 @@ router.put('/activation',async(req,res)=>{
         const updatedUser = await UserModel.updateOne({email:req.body.email},{$set:{status:"active"}});
         res.status(200).json({message:"Account activated"})
     } catch (error) {
-        res.status(500).json({message:"Unable to activate your account...Try Again later"});
+        res.status(500).json({message:"Unable to activate your account...Try Again later",error});
     }
 });
 
@@ -81,7 +81,7 @@ router.post('/login',async(req,res)=>{
         res.status(200).json({message:"login success",token,email:user.email});
         
     } catch (error) {
-        res.status(500).json({message:"Unable to login...Try Again later"});
+        res.status(500).json({message:"Unable to login...Try Again later",error});
     }
     
 });
@@ -119,7 +119,7 @@ router.put('/forgetpassword',async(req,res)=>{
         res.status(200).json({message:"Check you mail for reset link success",token,email:user.email});
         
     } catch (error) {
-        res.status(500).json({message:"Unable to login...Try Again later"});
+        res.status(500).json({message:"Unable to login...Try Again later",error});
     }
 });
 

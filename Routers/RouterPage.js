@@ -53,26 +53,13 @@ router.post('/signup',async(req,res)=>{
 
 router.put('/activation',async(req,res)=>{
     try {
-        const user = await UserModel.findOne({email:req.headers.email});
+        const user = await UserModel.findOne({email:req.body.email});
+        
         //Checking... user present or not
         if(!user){
             return res.status(403).json({message : "No user found"});
         }
-        const updatedUser = await UserModel.updateOne({email:req.headers.email},{$set:{status:"active"}});
-        res.status(200).json({message:"Account activated"})
-    } catch (error) {
-        res.status(500).json({message:"Unable to activate your account...Try Again later",error});
-    }
-});
-router.put('/activate',async(req,res)=>{
-    try {
-        console.log(localStorage["url-short-email"])
-        const user = await UserModel.findOne({email:await localStorage["url-short-email"]});
-        //Checking... user present or not
-        if(!user){
-            return res.status(403).json({message : "No user found"});
-        }
-        const updatedUser = await UserModel.updateOne({email:await localStorage["url-short-email"]},{$set:{status:"active"}});
+        const updatedUser = await UserModel.updateOne({email:req.body.email},{$set:{status:"active"}});
         res.status(200).json({message:"Account activated"})
     } catch (error) {
         res.status(500).json({message:"Unable to activate your account...Try Again later",error});

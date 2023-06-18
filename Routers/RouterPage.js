@@ -66,6 +66,7 @@ router.put('/activation',async(req,res)=>{
 });
 router.put('/activate',async(req,res)=>{
     try {
+        console.log(localStorage["url-short-email"])
         const user = await UserModel.findOne({email:await localStorage["url-short-email"]});
         //Checking... user present or not
         if(!user){

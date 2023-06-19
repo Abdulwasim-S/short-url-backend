@@ -152,7 +152,7 @@ router.post('/shorturl',async(req,res)=>{
 //Creating new Short URL....
 router.post('/shorturl',isAuth,async(req,res)=>{
     try {
-        const user = await UserModel.findOne({email:req.body.email});
+        const user = await UserModel.findOne({email:req.headers.email});
         if(!user){
             return res.status(403).json({message:"User not found"})
         }

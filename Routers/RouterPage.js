@@ -150,7 +150,7 @@ router.post('/shorturl',async(req,res)=>{
 
 
 //Creating new Short URL....
-router.post('/shorturl',isAuth,async(req,res)=>{
+router.post('/newshorturl',isAuth,async(req,res)=>{
     try {
         const user = await UserModel.findOne({email:req.headers.email});
         if(!user){

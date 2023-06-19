@@ -141,7 +141,7 @@ router.put('/resetpassword',isAuth,async(req,res)=>{
 });
 
 router.get('/shorturl',async(req,res)=>{
-    const shortUrls = await URLModel.find({email:req.body.email});
+    const shortUrls = await URLModel.find({email:req.headers.email});
     if(shortUrls.length===0){
         return res.status(403).json({message:"No URL found"})
     }

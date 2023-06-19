@@ -127,13 +127,13 @@ router.put('/forgetpassword',async(req,res)=>{
 
 router.put('/resetpassword',isAuth,async(req,res)=>{
     try {
-        const user = await UserModel.findOne({email:req.body.email});
+        const user = await UserModel.findOne({email:req.headers.email});
         //Checking... user present or not
         if(!user){
             return res.status(403).json({message : "No user found"});
         }
         const hashedPassword = await passwordHashing(req.body.password);
-        const updatedUser = await UserModel.updateOne({email:req.body.email},{$set:{password:hashedPassword}});
+        const updatedUser = await UserModel.updateOne({email:req.headers.email},{$set:{password:hashedPassword}});
         res.status(200).json({message:"password updated"})
     } catch (error) {
         res.status(500).json({message:"Unable to updated password...Try Again later"});

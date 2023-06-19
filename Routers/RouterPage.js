@@ -162,7 +162,7 @@ router.post('/newshorturl',isAuth,async(req,res)=>{
         }
         
         let newUrl = await URLModel({
-            email:"abdulwasimsmech@gmail.com",
+            email:req.headers.email,
             short_url:await generateShortUrl(),
             long_url:req.body.long_url,
             urlName:req.body.urlName

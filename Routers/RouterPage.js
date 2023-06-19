@@ -197,7 +197,8 @@ router.get('/:url',async(req,res)=>{
         if(!urlData){
             return res.status(403).json({message:"URL not found"})
         }
-        
+        const currentCount = +urlData.click_count + 1;
+        const updatecount = await URLModel.updateOne({short_url:req.params.url},{$set:{"click_count":currentCount}})
         res.redirect(urlData.long_url);
     } catch (error) {
         res.status(500).json({message:"Unable to delete ShortURL...Try again",error})

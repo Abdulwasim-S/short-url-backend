@@ -38,9 +38,9 @@ router.post('/signup',async(req,res)=>{
         let message = {
             from: 'abdulwasimsguvi@gmail.com',
             to: req.body.email,
-            subject: "url short", 
-            text: "url short", 
-            html: "<b>url short</b>", 
+            subject: "URL SHORTENER ACTIVATION LINK", 
+            text: "https://url-shortener-eight-sigma.vercel.app/activation", 
+            html: "<p>Click the below link to activate your account</P><br/><b>https://url-shortener-eight-sigma.vercel.app/activation</b>", 
 
         }
         //Sending activation link mail
@@ -54,7 +54,7 @@ router.post('/signup',async(req,res)=>{
 router.put('/activation',async(req,res)=>{
     try {
         const user = await UserModel.findOne({email:req.body.email});
-        
+
         //Checking... user present or not
         if(!user){
             return res.status(403).json({message : "No user found"});

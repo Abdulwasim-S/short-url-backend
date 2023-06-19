@@ -175,13 +175,13 @@ router.post('/shorturl',isAuth,async(req,res)=>{
 });
 
 //Deleting the url....
-router.delete('/deleteurl',isAuth,async(req,res)=>{
+router.delete('/:url',isAuth,async(req,res)=>{
     try {
-        const user = await UserModel.findOne({short_url:req.body.url});
+        const user = await UserModel.findOne({short_url:req.params.url});
         if(!user){
             return res.status(403).json({message:"URL not found"})
         }
-        let urlToDelete = await URLModel.deleteOne({short_url:req.body.url})
+        let urlToDelete = await URLModel.deleteOne({short_url:req.params.url})
         
         res.status(200).json({message:"deleted successfully"});
     } catch (error) {
@@ -201,7 +201,7 @@ router.get('/:url',async(req,res)=>{
         const updatecount = await URLModel.updateOne({short_url:req.params.url},{$set:{"click_count":currentCount}})
         res.redirect(urlData.long_url);
     } catch (error) {
-        res.status(500).json({message:"Unable to delete ShortURL...Try again",error})
+        res.status(500).json({message:"Unable to find ShortURL...Try again",error})
         console.log(error);
     }
 });

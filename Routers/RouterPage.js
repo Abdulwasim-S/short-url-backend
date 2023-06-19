@@ -110,8 +110,8 @@ router.put('/forgetpassword',async(req,res)=>{
             from: 'abdulwasimsguvi@gmail.com',
             to: req.body.email,
             subject: "password reset", 
-            text: "password reset", 
-            html: "<b>password reset</b>", 
+            text: "<p>Click the below link to reset password</p><br/><b>https://url-shortener-eight-sigma.vercel.app/resetpassword</b>", 
+            html: "<p>Click the below link to reset password</p><br/><b>https://url-shortener-eight-sigma.vercel.app/resetpassword</b>", 
 
         }
         //Sending password reset link mail

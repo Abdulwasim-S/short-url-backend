@@ -79,7 +79,7 @@ router.post('/login',async(req,res)=>{
         }
         const status = user.status;
         if(status==="inactive"){
-            return res.status(400).json({message:"Please activate your account"})
+            return res.status(400).json({message:"Please activate your account...Check your mail for activation link"})
         }
         //token generating
         const token = await generateToken(req.body.email);

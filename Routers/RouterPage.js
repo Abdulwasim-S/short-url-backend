@@ -77,6 +77,10 @@ router.post('/login',async(req,res)=>{
         if(!verification){
             return res.status(403).json({message : "Invalid credential "});
         }
+        const status = user.status;
+        if(status==="inactive"){
+            return res.status(400).json({message:"Please activate your account"})
+        }
         //token generating
         const token = await generateToken(req.body.email);
         res.status(200).json({message:"login success",token,email:user.email});
